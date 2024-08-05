@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="popup.js" defer></script>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <section>
+        <h1> Automatic Click </h1>
+        <p id="showMinute">Time</p>
+        <p>Click in start to begin autoclick</p>
+        <div class="containerinput">
+            <div class="">
+                <label for="range">Choose the minute</label>
+                <input type="range" class="inputrange" min="0.1" max="300" value="150" id="minuteRange" name="range" >
+            </div>
+            <div class="">
+                <label for="numberInput">Or put a minute</label>
+                <input type="number" class="inputnumber" name="numberInput" id="inputSec">
+            </div>
+        </div>
+        <button class="btnstart"> Start </button>
+    </section>
+</body>
+</html>
