@@ -6,10 +6,10 @@ var showMinute = document.getElementById('showMinute');
 var isStart = false;
 var counter = 0;
 var counterInterval = null;
-var clickInterval = null;
-var itemClickable = null;
+
 
 const [tab] = await chrome.tabs.query({
+    url: "https://console.sara.synkar.com/#/c3/robot?robot*",
     active: true,
     currentWindow: true
 })
@@ -18,6 +18,8 @@ const [tab] = await chrome.tabs.query({
 //     clearInterval(counterInterval);
 //     counterInterval = null;
 // }
+
+// https://console.sara.synkar.com/#/c3/robot?robot*
 
 // // const clickSimulate = ()=>{
 // //     showMinute.textContent = counter;
@@ -54,35 +56,16 @@ const [tab] = await chrome.tabs.query({
 //     })
 // }
 
-function startClicker(){
-    chrome.scripting.executeScript({
-        target: {tabId: tab.id},
-        function: ()=>{
-            itemClickable = document.getElementById('addbtn');
-            clickInterval = setInterval(()=>{itemClickable.click()}, 1000);
-        }
-    })
-}
-function stopClicker(){
-    chrome.scripting.executeScript({
-        target: {tabId: tab.id},
-        function: ()=>{
-            itemClickable = document.getElementById('addbtn');
-            clearInterval(clickInterval);
-        }
-    })
-}
-
 
 btnInit.addEventListener('click', async ()=>{
     if (!isStart) {
-        startClicker();
+        await chrome.tabs.sendMessage(tab.id, { action: 'startClick' });
 
         isStart = true;
         btnInit.textContent = 'Stop';
         btnInit.classList.add('btnstart-stop');
     } else {
-        stopClicker();
+        await chrome.tabs.sendMessage(tab.id, { action: 'stopClick' });
 
         isStart = false;
         btnInit.textContent = 'Start';
