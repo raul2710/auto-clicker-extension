@@ -1,32 +1,27 @@
 {
-    "manifest_version": 3,
-    "name": "Automatic Clicker",
-    "version": "1.0",
-    
-    "action": {
-      "default_popup": "popup.html"
-    },
+  "manifest_version": 3,
+  "name": "Automatic Clicker",
+  "version": "1.0",
+  
+  "action": {
+    "default_popup": "popup.html"
+  },
 
-    "icons": {
-        "16": "images/icon-16.png",
-        "32": "images/icon-32.png",
-        "48": "images/icon-48.png",
-        "128": "images/icon-128.png"
-    },
+  "icons": {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+  },
 
-    "content_scripts": {
-      "js": "./content.js",
-      "matches": [
-        "https://console.sara.synkar.com/#/c3/robot?robot*",
-        "https://developer.chrome.com/docs/webstore/*"
-      ]
-    },
-    "content_scripts": [
+  "content_scripts": [
     {
-      "matches": ["https://*.nytimes.com/*"],
-      "js": ["./content.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["content.js"]
     }
   ],
     
-    "permissions": ["scripting", "activeTab", "tabs"]
-  }
+  "permissions": ["scripting", "activeTab", "tabs"]
+}
