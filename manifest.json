@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "https://console.sara.synkar.com/*"
       ],
       "js": ["content.js"]
     }

@@ -8,7 +8,7 @@ var counter = 0;
 var counterInterval = null;
 
 const [tab] = await chrome.tabs.query({
-    // url: "https://console.sara.synkar.com/#/c3/robot?robot*",
+    url: "https://console.sara.synkar.com/*",
     active: true,
     currentWindow: true
 })
@@ -25,7 +25,7 @@ if (response.isStart === "true") {
 btnInit.addEventListener('click', async ()=>{
     if (!isStart) {
         counterInterval = inputSec.value;
-        console.log(counterInterval);
+
         await chrome.tabs.sendMessage(tab.id, { 
             action: 'startClick',
             delayTime: counterInterval
