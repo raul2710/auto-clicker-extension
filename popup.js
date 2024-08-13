@@ -13,32 +13,34 @@ const [tab] = await chrome.tabs.query({
     currentWindow: true
 })
 
-const response = await chrome.tabs.sendMessage(tab.id, {action: 'isStart'});
+if (tab) {
+    const response = await chrome.tabs.sendMessage(tab.id, {action: 'isStart'});
 
-if (response.isStart === "true") {
-    console.log('true');
-    isStart = true;
-    btnInit.textContent = 'Stop';
-    btnInit.classList.add('btnstart-stop');
-}
-  
-btnInit.addEventListener('click', async ()=>{
-    if (!isStart) {
-        counterInterval = inputSec.value;
-
-        await chrome.tabs.sendMessage(tab.id, { 
-            action: 'startClick',
-            delayTime: counterInterval
-        });
-
+    if (response.isStart === "true") {
+        console.log('true');
         isStart = true;
         btnInit.textContent = 'Stop';
         btnInit.classList.add('btnstart-stop');
-    } else {
-        await chrome.tabs.sendMessage(tab.id, { action: 'stopClick' });
-
-        isStart = false;
-        btnInit.textContent = 'Start';
-        btnInit.classList.remove('btnstart-stop');
     }
-})
+
+    btnInit.addEventListener('click', async ()=>{
+        if (!isStart) {
+            counterInterval = inputSec.value;
+
+            await chrome.tabs.sendMessage(tab.id, { 
+                action: 'startClick',
+                delayTime: counterInterval
+            });
+
+            isStart = true;
+            btnInit.textContent = 'Stop';
+            btnInit.classList.add('btnstart-stop');
+        } else {
+            await chrome.tabs.sendMessage(tab.id, { action: 'stopClick' });
+
+            isStart = false;
+            btnInit.textContent = 'Start';
+            btnInit.classList.remove('btnstart-stop');
+        }
+    })
+}
